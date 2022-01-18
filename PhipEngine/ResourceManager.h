@@ -14,7 +14,7 @@ public:
 	void UnloadTexture(const std::string& _name);
 	bool ContainsTexture(const std::string& _name);
 	sf::Texture& GetTexture(const std::string& _name);
-
+	
 private:
 	std::map<std::string, sf::Texture> textureMap;
 
