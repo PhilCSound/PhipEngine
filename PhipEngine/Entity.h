@@ -3,6 +3,8 @@
 #include <memory>
 
 //Entitys just constain a pointer to all Component types, but only one of each.
+
+//TODO: IMPLEMENT MEMOMORY POOL CLASS FOR LARGE PERFORMANCE GAINS.
 class Entity
 {
 public:
