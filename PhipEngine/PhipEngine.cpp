@@ -17,6 +17,7 @@ const bool PhipEngine::IsRunning()
 
 void PhipEngine::Run()
 {
+	//Think about how to handle input/scenes.
 	std::shared_ptr<Scene> _scene = SceneMan.GetCurrentScene();
 	if (!_scene)
 		HandleInput();
