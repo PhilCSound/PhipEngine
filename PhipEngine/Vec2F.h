@@ -3,7 +3,8 @@
 #include "SFML/System.hpp"
 
 
-//Todo, Templates. For now I am implementing as a Vec2 Int
+//TODO: Templates. For now I am implementing as a Vec2 Float
+//TODO: Finish writing this.
 class Vec2F
 {
 
