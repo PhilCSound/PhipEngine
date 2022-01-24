@@ -64,3 +64,19 @@ const std::string Vec2F::ToString()
 {
 	return "X: " + std::to_string(X) + ". Y: " + std::to_string(Y) + ".";
 }
+
+float Vec2F::DotProduct(const Vec2F & _Vec)
+{
+	return X * _Vec.X + Y * _Vec.Y;
+}
+
+bool Vec2F::IsZero()
+{
+	return ((X == 0) && (Y == 0));
+}
+
+//Tells if two vectors are 90 degrees from each other, it doesn't tell you if they intersect however.
+bool Vec2F::CheckPerpendicular(const Vec2F & _Vec)
+{
+	return !DotProduct(_Vec);
+}

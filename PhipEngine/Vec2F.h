@@ -22,7 +22,9 @@ public:
 	Vec2F& operator *=(float _RHS);
 	bool operator ==(const Vec2F& _RHS);
 	const std::string ToString();
-
+	float DotProduct(const Vec2F& _Vec);
+	bool IsZero();						//Change later with static consts
+	bool CheckPerpendicular(const Vec2F& _Vec);
 
 	//Member Variables
 	float X;
