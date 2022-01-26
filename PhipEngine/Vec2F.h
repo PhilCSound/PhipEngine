@@ -1,5 +1,6 @@
 #pragma once
 #include <string>
+#include <cmath>
 #include "SFML/System.hpp"
 
 
@@ -20,11 +21,24 @@ public:
 	Vec2F operator *(float _RHS);
 	Vec2F& operator *=(int _RHS);
 	Vec2F& operator *=(float _RHS);
-	bool operator ==(const Vec2F& _RHS);
+	bool operator ==(const Vec2F& _RHS) const;
 	const std::string ToString();
-	float DotProduct(const Vec2F& _Vec);
-	bool IsZero();						//Change later with static consts
-	bool CheckPerpendicular(const Vec2F& _Vec);
+	float DotProduct(const Vec2F& _Vec1);
+	float CrossProduct(const Vec2F& _Vec1);
+	float Distance(const Vec2F& _Vec1);
+	float Angle(const Vec2F& _Vec1);
+	void Normalize();
+
+	//Static Functions
+	static float DotProduct(const Vec2F& _Vec1, const Vec2F& _Vec2);
+	static float CrossProduct(const Vec2F& _Vec1, const Vec2F& _Vec2);
+	static bool CheckPerpendicular(const Vec2F& _Vec1, const Vec2F& _Vec2);
+	static float Distance(const Vec2F& _Vec1, const Vec2F& _Vec2);
+	static float Angle(const Vec2F& _Vec1, const Vec2F& _Vec2);
+	static Vec2F Normalize(const Vec2F& _Vec1);
+
+	//Static Variables
+	static const Vec2F Zero;
 
 	//Member Variables
 	float X;

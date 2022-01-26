@@ -55,9 +55,9 @@ Vec2F & Vec2F::operator*=(float _RHS)
 	return *this;
 }
 
-bool Vec2F::operator==(const Vec2F & _RHS)
+bool Vec2F::operator==(const Vec2F & _RHS) const
 {
-	return ((X == _RHS.X) && (Y = _RHS.Y));
+	return ((X == _RHS.X) && (Y == _RHS.Y));
 }
 
 const std::string Vec2F::ToString()
@@ -70,13 +70,72 @@ float Vec2F::DotProduct(const Vec2F & _Vec)
 	return X * _Vec.X + Y * _Vec.Y;
 }
 
-bool Vec2F::IsZero()
+float Vec2F::CrossProduct(const Vec2F & _Vec1)
 {
-	return ((X == 0) && (Y == 0));
+	return X * _Vec1.Y - Y * _Vec1.X;
 }
 
-//Tells if two vectors are 90 degrees from each other, it doesn't tell you if they intersect however.
-bool Vec2F::CheckPerpendicular(const Vec2F & _Vec)
+float Vec2F::Distance(const Vec2F & _Vec1)
 {
-	return !DotProduct(_Vec);
+	float _x = _Vec1.X - X;
+	float _y = _Vec1.Y - Y;
+	return std::sqrtf(_x * _x + _y * _y);
 }
+
+float Vec2F::Angle(const Vec2F & _Vec1)
+{
+	float _x = _Vec1.X - X;
+	float _y = _Vec1.Y - Y;
+	return std::atan2f(_y, _x);
+}
+
+void Vec2F::Normalize()
+{
+	if (*this == Zero)
+		return;
+
+	float _mag = std::sqrtf(X * X + Y * Y);
+	X /= _mag;
+	Y /= _mag;
+}
+
+float Vec2F::DotProduct(const Vec2F & _Vec1, const Vec2F & _Vec2)
+{
+	return _Vec1.X * _Vec2.X + _Vec1.Y * _Vec2.Y;
+}
+
+float Vec2F::CrossProduct(const Vec2F & _Vec1, const Vec2F & _Vec2)
+{
+	return _Vec1.X * _Vec2.Y - _Vec1.Y * _Vec2.X;
+}
+
+bool Vec2F::CheckPerpendicular(const Vec2F & _Vec1, const Vec2F & _Vec2)
+{
+	if (DotProduct(_Vec1, _Vec2) == 0.0f)
+		return true;
+	return false;
+}
+
+float Vec2F::Distance(const Vec2F & _Vec1, const Vec2F & _Vec2)
+{
+	float _x = _Vec2.X - _Vec1.X;
+	float _y = _Vec2.Y - _Vec1.Y;
+	return std::sqrtf(_x * _x + _y * _y);
+}
+
+float Vec2F::Angle(const Vec2F & _Vec1, const Vec2F & _Vec2)
+{
+	float _x = _Vec2.X - _Vec1.X;
+	float _y = _Vec2.Y - _Vec1.Y;
+	return std::atan2f(_y, _x);
+}
+
+Vec2F Vec2F::Normalize(const Vec2F & _Vec1)
+{
+	if (_Vec1 == Zero)
+		return _Vec1;
+	float _mag = std::sqrtf(_Vec1.X * _Vec1.X + _Vec1.Y * _Vec1.Y);
+	return Vec2F(_Vec1.X / _mag, _Vec1.Y / _mag);
+}
+
+const Vec2F Vec2F::Zero = Vec2F(0, 0);
