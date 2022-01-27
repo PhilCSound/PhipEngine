@@ -60,14 +60,11 @@ bool Vec2F::operator==(const Vec2F & _RHS) const
 	return ((X == _RHS.X) && (Y == _RHS.Y));
 }
 
-const std::string Vec2F::ToString()
+float Vec2F::Angle(const Vec2F & _Vec1)
 {
-	return "X: " + std::to_string(X) + ". Y: " + std::to_string(Y) + ".";
-}
-
-float Vec2F::DotProduct(const Vec2F & _Vec)
-{
-	return X * _Vec.X + Y * _Vec.Y;
+	float _x = _Vec1.X - X;
+	float _y = _Vec1.Y - Y;
+	return std::atan2f(_y, _x);
 }
 
 float Vec2F::CrossProduct(const Vec2F & _Vec1)
@@ -82,11 +79,14 @@ float Vec2F::Distance(const Vec2F & _Vec1)
 	return std::sqrtf(_x * _x + _y * _y);
 }
 
-float Vec2F::Angle(const Vec2F & _Vec1)
+float Vec2F::DotProduct(const Vec2F & _Vec)
 {
-	float _x = _Vec1.X - X;
-	float _y = _Vec1.Y - Y;
-	return std::atan2f(_y, _x);
+	return X * _Vec.X + Y * _Vec.Y;
+}
+
+float Vec2F::Magnitude()
+{
+	return std::sqrtf(X * X + Y * Y);
 }
 
 void Vec2F::Normalize()
@@ -99,14 +99,16 @@ void Vec2F::Normalize()
 	Y /= _mag;
 }
 
-float Vec2F::DotProduct(const Vec2F & _Vec1, const Vec2F & _Vec2)
+const std::string Vec2F::ToString()
 {
-	return _Vec1.X * _Vec2.X + _Vec1.Y * _Vec2.Y;
+	return "X: " + std::to_string(X) + ". Y: " + std::to_string(Y) + ".";
 }
 
-float Vec2F::CrossProduct(const Vec2F & _Vec1, const Vec2F & _Vec2)
+float Vec2F::Angle(const Vec2F & _Vec1, const Vec2F & _Vec2)
 {
-	return _Vec1.X * _Vec2.Y - _Vec1.Y * _Vec2.X;
+	float _x = _Vec2.X - _Vec1.X;
+	float _y = _Vec2.Y - _Vec1.Y;
+	return std::atan2f(_y, _x);
 }
 
 bool Vec2F::CheckPerpendicular(const Vec2F & _Vec1, const Vec2F & _Vec2)
@@ -116,6 +118,11 @@ bool Vec2F::CheckPerpendicular(const Vec2F & _Vec1, const Vec2F & _Vec2)
 	return false;
 }
 
+float Vec2F::CrossProduct(const Vec2F & _Vec1, const Vec2F & _Vec2)
+{
+	return _Vec1.X * _Vec2.Y - _Vec1.Y * _Vec2.X;
+}
+
 float Vec2F::Distance(const Vec2F & _Vec1, const Vec2F & _Vec2)
 {
 	float _x = _Vec2.X - _Vec1.X;
@@ -123,11 +130,14 @@ float Vec2F::Distance(const Vec2F & _Vec1, const Vec2F & _Vec2)
 	return std::sqrtf(_x * _x + _y * _y);
 }
 
-float Vec2F::Angle(const Vec2F & _Vec1, const Vec2F & _Vec2)
+float Vec2F::DotProduct(const Vec2F & _Vec1, const Vec2F & _Vec2)
 {
-	float _x = _Vec2.X - _Vec1.X;
-	float _y = _Vec2.Y - _Vec1.Y;
-	return std::atan2f(_y, _x);
+	return _Vec1.X * _Vec2.X + _Vec1.Y * _Vec2.Y;
+}
+
+float Vec2F::Magnitude(const Vec2F & _Vec1)
+{
+	return std::sqrtf(_Vec1.X * _Vec1.X + _Vec1.Y * _Vec1.Y);
 }
 
 Vec2F Vec2F::Normalize(const Vec2F & _Vec1)
@@ -138,4 +148,9 @@ Vec2F Vec2F::Normalize(const Vec2F & _Vec1)
 	return Vec2F(_Vec1.X / _mag, _Vec1.Y / _mag);
 }
 
+const Vec2F Vec2F::Down = Vec2F(0, -1);
+const Vec2F Vec2F::Left = Vec2F(-1, 0);
+const Vec2F Vec2F::Right = Vec2F(1, 0);
+const Vec2F Vec2F::Up = Vec2F(0, 1);
 const Vec2F Vec2F::Zero = Vec2F(0, 0);
+
